@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/alexesmet/Documents/Program/Python/donerking-rpa-api'
+let g:netrw_dirhist_5='/home/alexesmet/.local/share/desktop-directories'
+let g:netrw_dirhist_4='/home/alexesmet/.config/fontconfig/conf.d'
+let g:netrw_dirhist_3='/home/alexesmet/.config/fontconfig'
+let g:netrw_dirhist_2='/home/alexesmet/.cache/fontconfig'
+let g:netrw_dirhist_1='/usr/share/fonts/misc'
+let g:netrw_dirhist_0='/home/alexesmet/.config/qt5ct/qss'
+let g:netrw_dirhist_9='/home/alexesmet/.config/qt5ct/colors'
+let g:netrw_dirhist_8='/home/alexesmet/.config/qt5ct'
+let g:netrw_dirhist_7='/home/alexesmet/Documents/Work/dynamic-accommodation-sourcing-filter/src/main/java/tui/product/handler'
