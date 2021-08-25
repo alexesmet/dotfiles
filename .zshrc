@@ -3,12 +3,12 @@ zstyle ':completion:*' completer _complete _ignored _correct _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 zstyle :compinstall filename '/home/alexesmet/.zshrc'
 
-autoload -Uz compinit
-compinit
-_comp_options+=(globdots)		# Include hidden files.
+# Basic completion. replaced by zsh-completion
+# autoload -Uz compinit
+# compinit
+# _comp_options+=(globdots)		# Include hidden files.
 
-# Lines configured by zsh-newuser-install
-# History in cache directory:
+# === CONFIG ==============================================================
 HISTSIZE=100000
 SAVEHIST=100000
 HISTFILE=~/.cache/zsh/history
@@ -26,7 +26,7 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-# VIM
+# === VIM =================================================================
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 export KEYTIMEOUT=1
@@ -44,12 +44,12 @@ bindkey -M vicmd 'y' vi-yank-xclip
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# VARIABLES
+# === VARIABLES ===========================================================
 export PROMPT="%B%F{4}%m %f%1~%F{4}%# %f%b"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 fpath+=~/.zfunc
 
-# ALIAS
+# === ALIAS ===============================================================
 alias less='less -R'
 alias exa='exa --color=always --group-directories-first'
 alias ls='exa --color=always --group-directories-first'
@@ -63,34 +63,21 @@ alias xclip='xclip -sel clip'
 alias tfswitchb='tfswitch -b $HOME/.local/bin/terraform'
 alias vim='nvim'
 alias sudo='doas'
-
-# idiot-proof protection
 alias rm='rm -Iv'
 alias mv='mv -iv'
 alias cp='cp -iv --reflink=auto'
 alias ln='ln -iv'
+# alias neovide='neovide --multiGrid --disowned'
 
-# WORK
-aws-login() {
-    if [ -z "$1" ]; then
-        echo "Usage: $0 <token>"
-        return 1
-    fi
-    token="$1"
-    unset AWS_ACCESS_KEY_ID
-    unset AWS_SECRET_ACCESS_KEY
-    unset AWS_SESSION_TOKEN
-    MFA="arn:aws:iam::349928753634:mfa/aliaksei.miatlitski@tui.be"
-    creds=`aws sts get-session-token --duration-seconds 43200 --serial-number $MFA --token-code $token --output text`
-    if [ $? -ne 0 ]; then
-        echo 'An error occured during authentication'
-        return 1
-    fi
-    export AWS_ACCESS_KEY_ID=`echo $creds | awk {'print $2'}`
-    export AWS_SECRET_ACCESS_KEY=`echo $creds | awk {'print $4'}`
-    export AWS_SESSION_TOKEN=`echo $creds | awk {'print $5'}`
-}
+# === SYNTAX HIGHLITING PLUGIN ============================================
 source /home/alexesmet/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# Declare the variable
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
+
+
+# === COMPLETION PLUGIN ===================================================
+# source /home/alexesmet/.config/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+
+# === ZOXIDE - LS REPLACEMENT =============================================
+eval "$(zoxide init zsh)"

@@ -86,7 +86,10 @@ set imsearch=0
 highlight lCursor guifg=NONE guibg=Cyan
 
 
-" === KEY REMAPS ==========================================================
+" === SUPPORT MY OWN TIME FORMAT FILES ====================================
+au BufRead,BufNewFile *.time set filetype=time
+
+" === KEY REMAPS (VANILLA)=================================================
 " Insert a closing bracket if enter was pressed
 inoremap {<CR>  {<CR>}<Esc>O
 map j gj
@@ -132,6 +135,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<S-F2>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<a-cr>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<S-F6>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -148,7 +153,7 @@ end
 
 EOF
 
-" === COMPLETION ==========================================================
+" === COMPLETION, CODE ACTIONS ============================================
 
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
@@ -157,4 +162,3 @@ let g:completion_enable_auto_popup = 0
 
 "map <c-p> to manually trigger completion
 imap <silent> <C-Space> <Plug>(completion_trigger)
-
