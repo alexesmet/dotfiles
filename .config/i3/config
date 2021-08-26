@@ -95,6 +95,8 @@ bindsym --release XF86PowerOff mode "$mode_system"
 bindsym $mod+r mode "resize"
 # Enable / disable gaps
 bindsym $mod+Shift+g mode "$mode_gaps"
+# Moving workspaces between screens 
+bindsym $mod+grave move workspace to output right
 
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
@@ -162,7 +164,7 @@ exec --no-startup-id volumeicon
 exec --no-startup-id pulseaudio
 exec --no-startup-id pa-applet
 exec --no-startup-id dunst
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b --vsync
 exec --no-startup-id xfce4-power-manager
@@ -252,15 +254,15 @@ bar {
    strip_workspace_numbers no
 
     colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
-#                       border  backgr. text
-    focused_workspace  #BBBBBB #797979 #FFFFFF
-    active_workspace   #222D31 #222222 #FFFFFF
-    inactive_workspace #222D31 #222222 #ACACAC
+        background #0f101b
+        statusline #d2dae2
+        separator  #686d73
+    #                       border  backgr. text
+    focused_workspace  #d2dae2 #686d73 #FFFFFF
+    active_workspace   #0f101b #383838 #FFFFFF
+    inactive_workspace #0f101b #383838 #8c8c8c
     urgent_workspace   #6F4541 #922828 #FFFFFF
-    binding_mode       #222D31 #835C42 #FFFFFF
+    binding_mode       #0f101b #5E678F #FFFFFF
     }
 }
 
@@ -269,11 +271,11 @@ bar {
 
 # Theme colors
 # class                  border  backgr. text    indic.   child_border
-client.focused          #556064 #556064 #FFFFFF #FDF6E3   
-client.focused_inactive #2F3D44 #2F3D44 #BCBCBC #454948   
-client.unfocused        #2F3D44 #2F3D44 #BCBCBC #454948   
-client.urgent           #3F2926 #3F2926 #BC9393 #268BD2   
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   
+    client.focused          #555663 #555663 #FFFFFF #FDF6E3
+    client.focused_inactive #2e3042 #2e3042 #BCBCBC #454948
+    client.unfocused        #2e3042 #2e3042 #BCBCBC #454948
+    client.urgent           #3F2926 #3F2926 #BC9393 #268BD2
+    client.placeholder      #000000 #0C0C0C #FFFFFF #000000
 
 
 ################################################################################################
@@ -281,15 +283,13 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000
 ################################################################################################
 
 # Set shut down, restart and locking features
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id import -window root /tmp/s.png && i3lock -i /tmp/s.png, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit             , mode "default"
+    bindsym s exec --no-startup-id systemctl suspend       , mode "default"
+    bindsym r exec --no-startup-id systemctl reboot        , mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"

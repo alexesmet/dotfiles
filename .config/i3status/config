@@ -12,8 +12,8 @@ general {
 #        color_good = "#59AFFD"
 #        color_degraded = "#DC322F"
         color_good = "#FFFFFF"
-        color_bad = "#586E75"
-        color_degraded = "#C36060"
+        color_bad = "#AF7A8C"
+        color_degraded = "#93989e"
 }
 
 
@@ -22,13 +22,10 @@ order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "disk /"
 order += "disk /home"
-# order += "disk /home"
 order += "memory"
 order += "volume master"
-order += "read_file backlight"
-order += "wireless wlan0"
-order += "ethernet _first_"
-order += "battery all"
+# order += "read_file backlight"
+# order += "ethernet _first_"
 # order += "load"
 order += "tztime local"
 

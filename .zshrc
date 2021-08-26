@@ -4,9 +4,9 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle :compinstall filename '/home/alexesmet/.zshrc'
 
 # Basic completion. replaced by zsh-completion
-# autoload -Uz compinit
-# compinit
-# _comp_options+=(globdots)		# Include hidden files.
+autoload -Uz compinit
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
 # === CONFIG ==============================================================
 HISTSIZE=100000
@@ -45,7 +45,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # === VARIABLES ===========================================================
-export PROMPT="%B%F{4}%m %f%1~%F{4}%# %f%b"
+export PROMPT="%B%F{5}%m %f%1~%F{5}%# %f%b"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 fpath+=~/.zfunc
 
@@ -62,7 +62,6 @@ alias dd='dd status=progress'
 alias xclip='xclip -sel clip'
 alias tfswitchb='tfswitch -b $HOME/.local/bin/terraform'
 alias vim='nvim'
-alias sudo='doas'
 alias rm='rm -Iv'
 alias mv='mv -iv'
 alias cp='cp -iv --reflink=auto'
@@ -70,7 +69,7 @@ alias ln='ln -iv'
 # alias neovide='neovide --multiGrid --disowned'
 
 # === SYNTAX HIGHLITING PLUGIN ============================================
-source /home/alexesmet/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
 
@@ -79,5 +78,3 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
 # source /home/alexesmet/.config/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 
-# === ZOXIDE - LS REPLACEMENT =============================================
-eval "$(zoxide init zsh)"
