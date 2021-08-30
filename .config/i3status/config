@@ -81,7 +81,7 @@ battery all {
 
 memory {
         format = " ⮻ %used / %available "
-        threshold_degraded = "2G"
+        threshold_degraded = "500M"
         format_degraded = " ⮼ MEMORY < %available "
 }
 
