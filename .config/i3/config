@@ -285,7 +285,7 @@ bar {
 # Set shut down, restart and locking features
 set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id import -window root /tmp/s.png && i3lock -i /tmp/s.png, mode "default"
+    bindsym l exec --no-startup-id import -window root /tmp/s.png && convert /tmp/s.png -set colorspace Gray -separate -average -blur 16x8 /tmp/b.png && i3lock -i /tmp/b.png , mode "default"
     bindsym e exec --no-startup-id i3-msg exit             , mode "default"
     bindsym s exec --no-startup-id systemctl suspend       , mode "default"
     bindsym r exec --no-startup-id systemctl reboot        , mode "default"
