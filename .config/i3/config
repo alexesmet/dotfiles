@@ -57,6 +57,7 @@ bindsym $mod+Shift+d exec --no-startup-id morc_menu
 bindsym Print exec scrot -e 'mv $f /tmp/'
 # make screenshot, select area, move to /tmp/
 bindsym --release Shift+Print exec scrot -s -f -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
+bindsym --release $mod+Shift+s exec scrot -s -f -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
 # Focus windows:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -162,7 +163,7 @@ exec --no-startup-id volumeicon
 exec --no-startup-id pulseaudio
 exec --no-startup-id pa-applet
 exec --no-startup-id dunst
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b --vsync
 exec --no-startup-id xfce4-power-manager

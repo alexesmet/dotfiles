@@ -4,9 +4,9 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle :compinstall filename '/home/alexesmet/.zshrc'
 
 # Basic completion. replaced by zsh-completion
-# autoload -Uz compinit
-# compinit
-# _comp_options+=(globdots)		# Include hidden files.
+autoload -Uz compinit
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
 # === CONFIG ==============================================================
 HISTSIZE=100000

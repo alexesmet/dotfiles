@@ -101,7 +101,7 @@ map <Down> g<Down>
 
 " === NEOVIDE UI SETTINGS =================================================
 hi Pmenu guibg=grey10
-hi! link NonText Ignore
+hi! link NonText Ignore    
 
 
 " === PLUGINS =============================================================
