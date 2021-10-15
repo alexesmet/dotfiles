@@ -18,13 +18,13 @@ general {
 
 
 # order += "ipv6"
+order += "read_file arch"
 order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "disk /"
 order += "disk /home"
 order += "memory"
 order += "volume master"
-# order += "read_file backlight"
 # order += "ethernet _first_"
 # order += "load"
 order += "tztime local"
@@ -96,7 +96,7 @@ tztime local {
         format = " ⏲ %d.%m. %H:%M "
 }
 
-read_file backlight {
-        path = "/sys/class/backlight/intel_backlight/brightness"
-        format = " ☼ %content "
+read_file arch {
+        path = "/opt/arch-btw"
+        format = " %content "
 }
