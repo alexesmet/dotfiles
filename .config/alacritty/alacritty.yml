@@ -1,5 +1,5 @@
-background_opacity: 0.9
 font:
+  size: 12
   normal:
     family: Terminus
     style: Regular
@@ -8,9 +8,9 @@ font:
     family: Terminus
     style: Bold
 
-  size: 12
 
 window:
+  opacity: 0.9
   dimensions:
     columns: 95
     lines: 27

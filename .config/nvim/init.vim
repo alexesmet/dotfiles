@@ -71,10 +71,12 @@ set clipboard=unnamedplus
 " Highlight matching search patterns
 " set hlsearch
 
-" Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
+" Store info from no more than 100 files at a time, 9999 lines of text, 
+" 100kb of data. Useful for copying large amounts of data between files.
 set viminfo='100,<9999,s100
 
 set completeopt=longest,menuone
+set completeopt=noinsert,menuone,noselect
 
 " Disable that bar on the left
 set signcolumn=no
@@ -107,58 +109,60 @@ hi! link NonText Ignore
 " === PLUGINS =============================================================
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
 Plug 'rust-lang/rust.vim',          { 'for': 'rust' }
+Plug 'neovim/nvim-lspconfig'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+
+" enable ncm2 for all buffers
+let g:python3_host_prog='/usr/bin/python3'
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
 call plug#end()
 
 " === LSP =================================================================
 lua << EOF
-local nvim_lsp = require('lspconfig')
+local opts = { noremap=true, silent=true }
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+vim.keymap.set('n', '<F2>', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', '<S-F2>', vim.diagnostic.goto_next, opts)
 
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Mappings.
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<S-F2>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<a-cr>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<S-F6>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<a-cr>', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<S-F6>', vim.lsp.buf.rename, bufopts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "rust_analyzer" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+
+local lsp_flags = {
+  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150,
+}
+require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
+    flags = lsp_flags,
+}
+require('lspconfig')['tsserver'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['rust_analyzer'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    -- Server-specific settings...
+    settings = {
+      ["rust-analyzer"] = {}
     }
-  }
-end
+}
 
 EOF
 
-" === COMPLETION, CODE ACTIONS ============================================
-
-" Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
-" Disable auto-popup
-let g:completion_enable_auto_popup = 0
-
-"map <c-p> to manually trigger completion
-imap <silent> <C-Space> <Plug>(completion_trigger)

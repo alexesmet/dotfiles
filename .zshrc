@@ -1,5 +1,5 @@
 # The following lines were added by compinstall
-zstyle ':completion:*' completer _complete _ignored _correct _approximate
+zstyle ':completion:*' completer _complete _ignored 
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 zstyle :compinstall filename '/home/alexesmet/.zshrc'
 
@@ -67,6 +67,8 @@ alias rm='rm -Iv'
 alias mv='mv -iv'
 alias cp='cp -iv --reflink=auto'
 alias ln='ln -iv'
+alias cal='cal -m'
+alias drop='dragon-drag-and-drop'
 # alias neovide='neovide --multiGrid --disowned'
 
 # === SYNTAX HIGHLITING PLUGIN ============================================
@@ -81,3 +83,5 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
 
 # === ZOXIDE - LS REPLACEMENT =============================================
 eval "$(zoxide init zsh)"
+
+source /home/alexesmet/.config/broot/launcher/bash/br
