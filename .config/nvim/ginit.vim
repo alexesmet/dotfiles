@@ -1,4 +1,3 @@
-colorscheme desert
 set guifont=Unifont:h16
 set guifont=JetBrains\ Mono\ Light:h10
 hi Pmenu guibg=grey10
