@@ -99,7 +99,9 @@ map j gj
 map k gk
 map <Up> g<Up>
 map <Down> g<Down>
-
+autocmd FileType beancount inoremap . .<C-\><C-O>:AlignCommodity<CR>
+autocmd FileType beancount nnoremap <buffer> <leader>= :AlignCommodity<CR>
+autocmd FileType beancount vnoremap <buffer> <leader>= :AlignCommodity<CR>
 
 
 " === NEOVIDE UI SETTINGS =================================================
@@ -122,7 +124,7 @@ Plug 'simrat39/rust-tools.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 
-Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp' " thats all for completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
@@ -132,6 +134,14 @@ Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
+
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'folke/which-key.nvim' " shows keybindings suggestions
+
+
+
+
+Plug 'nathangrigg/vim-beancount'
 
 call plug#end()
 
@@ -168,12 +178,12 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-    { name = 'buffer' },
+    -- { name = 'buffer' },
     { name = "path" },
   })
 })
@@ -231,6 +241,15 @@ local lsp_flags = {
   debounce_text_changes = 150
 }
 
+require'lspconfig'.beancount.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
+    cmd = { "beancount-language-server", "--stdio" },
+    init_options = { 
+        journal_file = "/home/alexesmet/Documents/Accounting/root.beancount"
+    }
+}
 require('lspconfig')['pyright'].setup{
     capabilities = capabilities,
     on_attach = on_attach,
@@ -363,6 +382,13 @@ require('illuminate').configure({
 
 -- empty setup using defaults
 require("nvim-tree").setup()
+vim.opt.list = true
+vim.opt.listchars:append "eol:↴"
+require("indent_blankline").setup {
+    show_end_of_line = true,
+}
+require("which-key").setup {
+}
 
 EOF
 

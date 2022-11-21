@@ -287,7 +287,10 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000
 # Set shut down, restart and locking features
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    # TODO: Get rid of i3exit, as it is not in dotfiles.
+    # NOTE: make sure to replace systemctl with loginctl (cat /proc/1/comm)
+
+    bindsym l exec --no-startup-id xsecurelock, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"

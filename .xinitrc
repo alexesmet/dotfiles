@@ -10,6 +10,7 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 
+
 DEFAULT_SESSION='i3 --shmlog-size 0'
 
 # merge in defaults and keymaps
@@ -68,3 +69,4 @@ exec $(get_session "$1")
 
 xset +fp /usr/share/fonts/local
 xset fp rehash
+

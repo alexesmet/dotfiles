@@ -47,6 +47,7 @@ bindkey '^e' edit-command-line
 # === VARIABLES ===========================================================
 export PROMPT="%B%F{4}%m %f%1~%F{4}%# %f%b"
 export RANGER_LOAD_DEFAULT_RC=FALSE
+export BARTIB_FILE="/home/alexesmet/.bartib"
 fpath+=~/.zfunc
 
 # === ALIAS ===============================================================
@@ -83,5 +84,5 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
 
 # === ZOXIDE - LS REPLACEMENT =============================================
 eval "$(zoxide init zsh)"
-
 source /home/alexesmet/.config/broot/launcher/bash/br
+source /usr/share/nvm/init-nvm.sh
