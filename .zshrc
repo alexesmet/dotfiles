@@ -45,7 +45,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # === VARIABLES ===========================================================
-export PROMPT="%B%F{4}%m %f%1~%F{4}%# %f%b"
+export PROMPT="%B%F{3}%m %f%1~%F{3}%# %f%b"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export BARTIB_FILE="/home/alexesmet/.bartib"
 fpath+=~/.zfunc
@@ -70,13 +70,12 @@ alias cp='cp -iv --reflink=auto'
 alias ln='ln -iv'
 alias cal='cal -m'
 alias drop='dragon-drag-and-drop'
-# alias neovide='neovide --multiGrid --disowned'
+alias neovide='neovide --multigrid'
 
 # === SYNTAX HIGHLITING PLUGIN ============================================
 source /home/alexesmet/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
-
 
 # === COMPLETION PLUGIN ===================================================
 # source /home/alexesmet/.config/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -85,4 +84,6 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
 # === ZOXIDE - LS REPLACEMENT =============================================
 eval "$(zoxide init zsh)"
 source /home/alexesmet/.config/broot/launcher/bash/br
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+#
+source /home/alexesmet/.config/zsh-window-title/zsh-window-title.zsh

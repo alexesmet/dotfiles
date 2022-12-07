@@ -102,6 +102,12 @@ map <Down> g<Down>
 autocmd FileType beancount inoremap . .<C-\><C-O>:AlignCommodity<CR>
 autocmd FileType beancount nnoremap <buffer> <leader>= :AlignCommodity<CR>
 autocmd FileType beancount vnoremap <buffer> <leader>= :AlignCommodity<CR>
+nnoremap <M-1> <cmd>NvimTreeFocus<cr>
+nnoremap <leader>ft <cmd>NvimTreeFindFile<cr>          
+nnoremap <leader>ff <cmd>Telescope find_files<cr>      
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>       
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
 " === NEOVIDE UI SETTINGS =================================================
@@ -135,10 +141,12 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
 
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'folke/which-key.nvim' " shows keybindings suggestions
-
-
+Plug 'norcalli/nvim-colorizer.lua'
 
 
 Plug 'nathangrigg/vim-beancount'
@@ -232,6 +240,9 @@ local on_attach = function(client, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<a-cr>', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', '<S-F6>', vim.lsp.buf.rename, bufopts)
 end
@@ -335,7 +346,7 @@ require('illuminate').configure({
     providers = {
         'lsp',
         'treesitter',
-        'regex',
+        -- 'regex',
     },
     -- delay: delay in milliseconds
     delay = 10,
@@ -381,14 +392,28 @@ require('illuminate').configure({
 -- vim.opt.termguicolors = true
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+    hijack_cursor = true,
+    open_on_tab = true,
+    view = {
+        adaptive_size = false,
+        centralize_selection = false,
+        width = 50,
+    },
+    actions = {
+        open_file = {
+            resize_window = trueniceties
+        }
+    }
+})
+require("toggleterm").setup{
+  open_mapping = [[<M-\>]],
+}
 vim.opt.list = true
-vim.opt.listchars:append "eol:↴"
 require("indent_blankline").setup {
-    show_end_of_line = true,
+    show_end_of_line = false,
 }
-require("which-key").setup {
-}
+-- require'colorizer'.setup()
 
 EOF
 
