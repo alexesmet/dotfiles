@@ -1,0 +1,62 @@
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+Xcursor.theme: xcursor-breeze
+
+!! Colorscheme
+*.foreground: #93a1a1
+*.background: #141c21
+*.cursorColor: #afbfbf
+*.color0: #263640
+*.color8: #4a697d
+*.color1: #d12f2c
+*.color9: #fa3935
+*.color2: #819400
+*.color10: #a4bd00
+*.color3: #b08500
+*.color11: #d9a400
+*.color4: #2587cc
+*.color12: #2ca2f5
+*.color5: #696ebf
+*.color13: #8086e8
+*.color6: #289c93
+*.color14: #33c5ba
+*.color7: #bfbaac
+*.color15: #fdf6e3
+
+!! URxvt Appearance
+URxvt.font: xft:Gohu GohuFont:size=11:style=Regular:antialias=true
+URxvt.boldFont: xft:Gohu GohuFont:size=11:style=Bold:antialias=true
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 4
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+
+!! XTerm Appearance
+XTerm.font: xft:Gohu GohuFont:size=11:style=Regular:antialias=true
+XTerm.boldFont: xft:Gohu GohuFont:size=11:style=Bold:antialias=true
+XTerm.letterSpace: 0
+XTerm.lineSpace: 0
+XTerm.geometry: 92x24
+XTerm.internalBorder: 4
+XTerm.cursorBlink: true
+XTerm.cursorUnderline: false
+XTerm.saveline: 2048
+XTerm.scrollBar: false
+XTerm.scrollBar_right: false
+XTerm.urgentOnBell: true
+XTerm.depth: 24
+XTerm.iso14755: false

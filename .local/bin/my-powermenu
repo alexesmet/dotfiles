@@ -1,0 +1,5 @@
+#/usr/bin/sh
+
+
+dir="$(dirname "$0")"
+$dir/powermenu/powermenu.sh

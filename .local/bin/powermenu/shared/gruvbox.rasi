@@ -1,0 +1,12 @@
+* {
+    background:     #1d2021FF; /* bg dark */
+    background-mai: #282828FF; /* bg default */
+    background-alt: #3c3836FF; /* hl */
+    foreground:     #EBDBB2FF; /* fg */
+    prompt:         #83A598FF; /* blue */
+    selected:       #fabd2fFF; /* yellow */
+    active:         #B8BB26FF; /* green */
+    urgent:         #FB4934FF; /* red */
+
+    border-color:   #a89984;   /* custom border color */
+}
