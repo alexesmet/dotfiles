@@ -4,6 +4,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export EDITOR=/usr/bin/nvim
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export XORGCONFIG="$HOME/.config/xorg.conf"
+export FONTCONFIG_PATH=/etc/fonts
 
 export XSECURELOCK_BLANK_TIMEOUT=1
 export XSECURELOCK_AUTH_TIMEOUT=10

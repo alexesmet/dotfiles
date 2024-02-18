@@ -1,5 +1,5 @@
 configuration {
-  modes: [ ];
-}
-
-@theme "gruvbox-dark"
+ modi: "window";
+ font: "cozette 11";
+ }
+@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"

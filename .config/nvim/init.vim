@@ -89,7 +89,7 @@ set completeopt=noinsert,menuone,noselect
 set completeopt=menu,menuone,noselect
 
 " Disable that bar on the left
-set signcolumn=no
+" set signcolumn=no
 
 " === RUSSIAN LANGUAGE SUPPORT ============================================
 set keymap=russian-jcukenwin
@@ -127,11 +127,6 @@ nnoremap <leader>dt <Plug>(toggle-lsp-diag)
 
 command! -bar FormatBeancount ,$s:\v( |-)(\d+\.?\d{0,2}) ([A-Z]{3}):\=printf('%s%.2f %s',submatch(1),str2float(submatch(2)),submatch(3)):g|g:^$:d|,$AlignCommodity
 
-" === NEOVIDE UI SETTINGS =================================================
-" hi Pmenu guibg=grey10
-" hi! link NonText Ignore
-
-
 " === PLUGINS =============================================================
 call plug#begin('~/.config/nvim/plugged')
 
@@ -153,17 +148,19 @@ Plug 'hrsh7th/vim-vsnip-integ'
 " tools and features
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+Plug 'airblade/vim-gitgutter'
 Plug 'windwp/nvim-autopairs'
+Plug 'kylechui/nvim-surround'
+Plug 'vim-scripts/ReplaceWithRegister'
 
 " visuals
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'RRethy/vim-illuminate' " <a-n> and <a-p> as keymaps to move between references
 Plug 'morhetz/gruvbox'
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'cormacrelf/vim-colors-github'
 
 " lang specific
 Plug 'simrat39/rust-tools.nvim'
@@ -251,11 +248,13 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
+
+require("nvim-surround").setup()
 require("nvim-autopairs").setup {}
+
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local opts = { noremap=true, silent=true }
 
 vim.keymap.set('n', '<S-F2>', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', '<F2>', vim.diagnostic.goto_next, opts)
@@ -309,7 +308,7 @@ rt.setup({
   server = {
     settings = {
       ["rust-analyzer"] = {
-        diagnostics = { enable = true, experimental = { enable = true } },
+        diagnostics = { enable = true, experimental = { enable = false } },
         checkOnSave = { enable = true }
       }
     },
@@ -427,6 +426,7 @@ require("nvim-tree").setup({
         width = 50,
     },
     renderer = {
+        highlight_diagnostics = "none",
         icons = {
             git_placement = "after"
         }
@@ -441,10 +441,9 @@ require("toggleterm").setup{
   open_mapping = [[<M-\>]],
 }
 vim.opt.list = true
-require("indent_blankline").setup {
-    show_end_of_line = false,
-}
 require'colorizer'.setup()
+
+vim.diagnostic.config({ signs = false })
 
 
 EOF
