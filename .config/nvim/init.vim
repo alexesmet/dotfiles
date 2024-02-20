@@ -151,7 +151,6 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
-Plug 'airblade/vim-gitgutter'
 Plug 'windwp/nvim-autopairs'
 Plug 'kylechui/nvim-surround'
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -159,6 +158,8 @@ Plug 'vim-scripts/ReplaceWithRegister'
 " visuals
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'RRethy/vim-illuminate' " <a-n> and <a-p> as keymaps to move between references
+Plug 'airblade/vim-gitgutter'
+Plug 'kshenoy/vim-signature'
 Plug 'morhetz/gruvbox'
 Plug 'cormacrelf/vim-colors-github'
 
