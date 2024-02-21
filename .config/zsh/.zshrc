@@ -74,7 +74,6 @@ alias rescan='nmcli dev wifi list --rescan yes | cat'
 alias beep='paplay /usr/share/sounds/freedesktop/stereo/complete.oga'
 
 eval "$(zoxide init zsh)"
-source ~/.config/broot/launcher/bash/br
 source ~/.config/zsh-window-title/zsh-window-title.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
