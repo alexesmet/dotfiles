@@ -1,0 +1,89 @@
+
+configuration {
+  font: "cozette 10";
+  drun-display-format: "{name} [<span weight='light' color='dimgray'>({generic})</span>]";
+
+  drun {
+    display-name: "⚑";
+  }
+
+  window {
+    display-name: "💼";
+  }
+
+  timeout {
+    delay: 10;
+    action: "kb-cancel";
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+
+  bg: #282828;
+  bg-alt: #444444;
+  fg: #eeeeee;
+  bg-sel: #323232;
+  fg-sel: #b3deef;
+
+  background-color: @bg;
+  text-color: @fg;
+}
+
+window {
+  transparency: "real";
+  width: 600px;
+  border: 1px;
+  border-color: #bbbbbb;
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+inputbar {
+  background-color: @bg-alt;
+  children: [prompt, entry];
+}
+
+entry {
+  background-color: inherit;
+  padding: 4px 4px;
+}
+
+prompt {
+  background-color: inherit;
+  padding: 4px 8px 4px 8px;
+}
+
+listview {
+  lines: 8;
+}
+
+element {
+  children: [element-index,element-text];
+}
+
+element-text {
+  padding: 4px;
+  highlight: none;
+}
+
+element-text selected {
+  background-color: @bg-sel;
+  text-color: @fg-sel;
+}
+
+element-index {
+  background-color: inherit;
+  padding: 4px 8px 4px 8px;
+  text-color: @bg-alt;
+}
+
+element-index selected {
+  background-color: @bg-sel;
+  text-color: @fg-sel;
+  highlight: bold;
+}

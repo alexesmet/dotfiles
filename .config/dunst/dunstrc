@@ -16,14 +16,14 @@
     progress_bar_frame_width = 1
     progress_bar_min_width = 150
     progress_bar_max_width = 300
-    progress_bar_corner_radius = 0
+    progress_bar_corner_radius = 1
     icon_corner_radius = 0
     # Show how many messages are currently hidden (because of
     # notification_limit).
     indicate_hidden = yes
-    transparency = 10
+    transparency = 5
     separator_height = 2
-    separator_color = "#585858"
+    separator_color = "#666666"
     # Padding between text and separator.
     padding = 8
     # Horizontal padding.
@@ -31,7 +31,10 @@
     # Padding between text and icon.
     text_icon_padding = 8
     frame_width = 1
-    frame_color = "#a89984"
+    frame_color = "#bbbbbb"
+    highlight = "#dadada"
+    background = "#282828"
+    foreground = "#eeeeee"
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.
@@ -239,21 +242,17 @@
 
 
 [urgency_low]
-    background = "#282828"
-    foreground = "#ebdbb2"
     timeout = 5
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
     timeout = 20
 
 [urgency_critical]
-    background = "#282828"
-    foreground = "#ebdbb2"
     timeout = 0
-    # Icon for notifications with critical urgency, uncomment to enable
-    #default_icon = /path/to/icon
+
+[device_notifications]
+    category = "device"
+    timeout = 1
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

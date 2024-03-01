@@ -160,7 +160,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'RRethy/vim-illuminate' " <a-n> and <a-p> as keymaps to move between references
 Plug 'airblade/vim-gitgutter'
 Plug 'kshenoy/vim-signature'
-Plug 'morhetz/gruvbox'
+Plug 'jacoborus/tender.vim'
 Plug 'cormacrelf/vim-colors-github'
 
 " lang specific
@@ -171,9 +171,7 @@ Plug 'mechatroner/rainbow_csv'
 
 call plug#end()
 
-let g:gruvbox_transparent_bg = 1
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+colorscheme tender
 
 if !exists('g:neovide')
     highlight Normal     ctermbg=NONE guibg=NONE

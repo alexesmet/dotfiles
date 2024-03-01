@@ -1,12 +1,12 @@
 * {
-    background:     #1d2021FF; /* bg dark */
+    background:     #000000; /* bg dark */
     background-mai: #282828FF; /* bg default */
-    background-alt: #3c3836FF; /* hl */
-    foreground:     #EBDBB2FF; /* fg */
-    prompt:         #83A598FF; /* blue */
-    selected:       #fabd2fFF; /* yellow */
-    active:         #B8BB26FF; /* green */
-    urgent:         #FB4934FF; /* red */
+    background-alt: #444444; /* hl */
+    foreground:     #eeeeee; /* fg */
+    prompt:         #73cef4; /* blue */
+    selected:       #dadada; /* yellow */
+    active:         #9faa00; /* green */
+    urgent:         #c5152f; /* red */
 
-    border-color:   #a89984;   /* custom border color */
+    border-color:   #bbbbbb;   /* custom border color */
 }

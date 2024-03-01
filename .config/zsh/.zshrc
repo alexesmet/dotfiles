@@ -45,7 +45,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # === VARIABLES ===========================================================
-export PROMPT="%B%F{3}%m %f%1~%F{3}%# %f%b"
+export PROMPT="%B%F{6}%m %f%1~%F{6}%# %f%b"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export BARTIB_FILE="~/.bartib"
 fpath+=~/.zfunc

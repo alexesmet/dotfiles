@@ -3,10 +3,17 @@
 # terminal emulator
 super + {_,shift +} Return
 	alacritty --class {Alacritty,Floating},Alacritty
+super + t
+	alacritty --class Floating,Alacritty
+
 
 # program launcher
+# j4-dmenu-desktop --dmenu="dmenu -l 10 -c -i -nb '#282828' -nf '#EBDBB2' -sb '#EBDBB2' -sf '#1d2021' -fn 'Cozette'"
 super + d
-	j4-dmenu-desktop --dmenu="dmenu -l 10 -c -i -nb '#282828' -nf '#EBDBB2' -sb '#EBDBB2' -sf '#1d2021' -fn 'Cozette'"
+	rofi -show drun
+# focus the last node/desktop
+super + Tab
+	rofi -show window
 
 # more featured program launcher
 super + shift + d
@@ -14,6 +21,7 @@ super + shift + d
 
 super + x
     speedcrunch
+
 super + h
     dunstctl history-pop
 
@@ -25,26 +33,40 @@ super + Escape
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # FUNCTIONAL KEYS
 
-XF86ScreenSaver
-    xset dpms force off
-
-XF86MonBrightness{Up,Down}
-    xbacklight {-inc,-dec} 10
-
-XF86Audio{Raise,Lower}Volume
-    amixer set Master 10%{+,-}
 
 XF86AudioMute
-    amixer set Master toggle
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; \
+	notify-send -c device -h int:value:`bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100"` -r 84161322 "Volume = $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | rg '\[.+\]' -o)"
 
+XF86Audio{Raise,Lower}Volume
+	DIR='{+,-}'; \
+	wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%$DIR; \
+	notify-send -c device -h int:value:`bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100"` -r 84161322 "Volume $DIR $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | rg '\[.+\]' -o)"
+
+XF86AudioMicMute
+    wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle; \
+    echo "change" >> /var/tmp/microphone-fifo; \
+	notify-send -c device  -r 84161323 "Microphone $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | rg '\[.+\]' -o || echo unmuted)"
+
+XF86MonBrightness{Up,Down}
+	DIR='{inc,dec}'; \
+    xbacklight -$DIR 5; \
+	notify-send -c device -h int:value:`xbacklight -get` -r 84161324 "Brightness $DIR"
+
+XF86Touchpad{On,Off}
+	notify-send  -c device -r 84161325 "Touchpad {on,off}"
+XF86Calculator
+    speedcrunch
+super + p
+    xset dpms force off
 XF86Audio{Stop,Pause,Play,Next,Prev}
     playerctl {Stop,pause,play-pause,next,previous}
 
 Print
-    scrot -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
+    scrot -z -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
 
 super + shift + s
-    scrot -s -f -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
+    scrot -z -s -f -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
 
 XF86Power{Down,Off}
     my-powermenu
@@ -112,9 +134,6 @@ super + {_,shift + }c
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
-# focus the last node/desktop
-super + Tab
-	rofi -show window
 
 # focus the older or newer node in the focus history
 super + {o,i}

@@ -8,9 +8,9 @@ for j in f b; do
 done
 
 d=$'\e[2m'
+b=$'\e[1m'
 t=$'\e[0m'
 v=$'\e[7m'
-d=$'\033[2m'
 
 cat << EOF
  
