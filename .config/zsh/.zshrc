@@ -69,7 +69,7 @@ alias cp='cp -iv --reflink=auto'
 alias ln='ln -iv'
 alias cal='cal -m'
 alias drop='dragon-drop'
-alias bt='bluetuith'
+alias bt='bluetuith --no-warning'
 alias rescan='nmcli dev wifi list --rescan yes | cat'
 alias beep='paplay /usr/share/sounds/freedesktop/stereo/complete.oga'
 

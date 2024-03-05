@@ -59,6 +59,7 @@ export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/startup
 export CGDB_DIR=$XDG_CONFIG_HOME/cgdb
+export LESSHISTSIZE=0
 
 
 # Added by Toolbox App

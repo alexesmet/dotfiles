@@ -3,5 +3,5 @@ Encoding=UTF-8
 Version=1.0
 Type=Application
 Terminal=false
-Exec=~/.local/bin/worked-today-desktop.sh
+Exec=worked-today-desktop.sh
 Name=Custom worked-today script

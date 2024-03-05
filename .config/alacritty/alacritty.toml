@@ -1,4 +1,5 @@
-# Default colors - tender
+# colorscheme tender
+# todo: also try monokai_pro!
 [colors.primary]
 background = '#282828'
 foreground = '#eeeeee'
@@ -26,10 +27,10 @@ cyan    = '#73cef4'
 white   = '#feffff'
 
 [colors]
-draw_bold_text_with_bright_colors = false
+draw_bold_text_with_bright_colors = true
 
 [font]
-size = 14
+size = 13.5
 
 [font.bold]
 family = "Terminus"

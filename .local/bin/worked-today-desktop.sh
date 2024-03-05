@@ -1,3 +1,5 @@
+#!/usr/bin/sh
+
 alacritty --class Pseudo,Alacritty \
     -o window.dimensions.lines=27 \
     -o window.dimensions.columns=42 \
