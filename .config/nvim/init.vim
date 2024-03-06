@@ -160,8 +160,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'RRethy/vim-illuminate' " <a-n> and <a-p> as keymaps to move between references
 Plug 'airblade/vim-gitgutter'
 Plug 'kshenoy/vim-signature'
-Plug 'jacoborus/tender.vim'
-Plug 'cormacrelf/vim-colors-github'
+Plug 'sainnhe/sonokai'
 
 " lang specific
 Plug 'simrat39/rust-tools.nvim'
@@ -171,17 +170,25 @@ Plug 'mechatroner/rainbow_csv'
 
 call plug#end()
 
-colorscheme tender
 
-if !exists('g:neovide')
-    highlight Normal     ctermbg=NONE guibg=NONE
-    highlight LineNr     ctermbg=NONE guibg=NONE
-    highlight SignColumn ctermbg=NONE guibg=NONE
-en
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'shusia'
+let g:sonokai_transparent_background = 1
+
+colorscheme sonokai
+
+" if !exists('g:neovide')
+"    highlight Normal     ctermbg=NONE guibg=NONE
+"    highlight LineNr     ctermbg=NONE guibg=NONE
+"    highlight SignColumn ctermbg=NONE guibg=NONE
+"en
 
 
 " === LSP =================================================================
 lua << EOF
+
+-- For dark theme (neovim's default)
+vim.o.background = 'dark'
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

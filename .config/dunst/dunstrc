@@ -23,7 +23,7 @@
     indicate_hidden = yes
     transparency = 5
     separator_height = 2
-    separator_color = "#666666"
+    separator_color = "#848089"
     # Padding between text and separator.
     padding = 8
     # Horizontal padding.
@@ -31,10 +31,10 @@
     # Padding between text and icon.
     text_icon_padding = 8
     frame_width = 1
-    frame_color = "#bbbbbb"
-    highlight = "#dadada"
-    background = "#282828"
-    foreground = "#eeeeee"
+    frame_color = "#848089"
+    highlight = "#e5c463"
+    background = "#2d2a2e"
+    foreground = "#e3e1e4"
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.

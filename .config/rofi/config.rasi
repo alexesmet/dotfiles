@@ -148,4 +148,4 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "tender.rasi"
+@theme "colors.rasi"

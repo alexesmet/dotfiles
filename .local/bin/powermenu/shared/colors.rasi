@@ -1,18 +1,13 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Colors
- *
- * Available Colors Schemes
- *
- * adapta    catppuccin    everforest    navy       paper
- * arc       cyberpunk     gruvbox       nord       solarized
- * black     dracula       lovelace      onedark    yousai
- *
- **/
+/* sonokai sushia */
+* {
+    background:     #1a181a; /* black */
+    background-mai: #2d2a2e; /* bg default */
+    background-alt: #49464e; /* hl / bg4 */
+    foreground:     #e3e1e4; /* fg */
+    prompt:         #78dce8; /* blue */
+    selected:       #e3e1e4; /* fg / yellow */
+    active:         #a9dc76; /* green */
+    urgent:         #ff6188; /* red */
 
-/* Import color-scheme from `colors` directory */
-
-@import "gruvbox.rasi"
+    border-color:   #848089; /* grey */
+}

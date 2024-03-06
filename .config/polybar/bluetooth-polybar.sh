@@ -1,8 +1,9 @@
 #!/bin/sh
+# colorsheme tomorrow night bright
 if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
-    echo "%{F#666666}睊"
+    echo "%{F#848089}睊"
 elif [ $(echo info | bluetoothctl | grep 'Device ' | wc -c) -eq 0 ]; then 
-    echo "%{F#eeeeee}睊"
+    echo "%{F#e3e1e4}睊"
 else
-    echo "%{F#73cef4}直"
+    echo "%{F#7accd7}直"
 fi

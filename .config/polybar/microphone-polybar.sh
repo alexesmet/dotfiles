@@ -14,7 +14,8 @@ case "$1" in
     *)
         while
             case "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" in 
-                *MUTED* ) echo "%{F#f43753}";;
+                # Theme tomorrow night bright
+                *MUTED* ) echo "%{F#f85e84}";;
                 * ) echo ""
             esac
             cat $PIPE >> /dev/null  

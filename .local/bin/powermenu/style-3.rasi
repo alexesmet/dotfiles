@@ -72,7 +72,7 @@ textbox-prompt-colon {
     padding:                     4px 8px;
     border-radius:               0px;
     background-color:            @urgent;
-    text-color:                  @foreground;
+    text-color:                  @background;
 }
 prompt {
     enabled:                     true;

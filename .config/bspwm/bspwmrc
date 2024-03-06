@@ -37,11 +37,11 @@ bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-# tender
-bspc config normal_border_color   "#444444"
-bspc config active_border_color   "#fe8019"
-bspc config focused_border_color  "#bbbbbb"
-bspc config presel_feedback_color "#d3b987"
+# sonokai
+bspc config normal_border_color   "#423f46" # bg3
+bspc config active_border_color   "#ef9062" # orange
+bspc config focused_border_color  "#848089" # grey
+bspc config presel_feedback_color "#848089"
 
 bspc rule -a Nitrogen state=floating focus=on rectangle=500x500+300+300
 bspc rule -a Pavucontrol state=pseudo_tiled focus=on

@@ -1,30 +1,52 @@
-# colorscheme tender
-# todo: also try monokai_pro!
+# Colors sonokai sushia
+# https://github.com/sainnhe/sonokai?tab=readme-ov-file#%F0%9D%90%92%F0%9D%90%A1%F0%9D%90%AE%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%9A
+
+# List of all other places where this theme is applied:
+# - [x] polybar and deps
+# - [x] bspwm
+# - [x] powermenu
+# - [x] rofi
+# - [x] vim
+# - [x] galendae
+
 [colors.primary]
-background = '#282828'
-foreground = '#eeeeee'
+background = "#2d2a2e"
+foreground = "#e3e1e4"
 
-# Normal colors
 [colors.normal]
-black   = '#282828'
-red     = '#c5152f'
-green   = '#c9d05c'
-yellow  = '#ffc24b'
-blue    = '#b3deef'
-magenta = '#d3b987'
-cyan    = '#73cef4'
-white   = '#eeeeee'
+black        = "#1a181a"
+red          = "#f85e84"
+green        = "#9ecd6f"
+yellow       = "#e5c463"
+blue         = "#7accd7"
+magenta      = "#ab9df2"
+cyan         = "#ef9062"
+white        = "#e3e1e4"
 
-# Bright colors
-[colors.bright]
-black   = '#4c4c4c'
-red     = '#f43753'
-green   = '#c9d05c'
-yellow  = '#ffc24b'
-blue    = '#b3deef'
-magenta = '#d3b987'
-cyan    = '#73cef4'
-white   = '#feffff'
+# other colors from sonokai sushia
+# 'black':      #1a181a
+# 'bg_dim':     #211f21
+# 'bg0':        #2d2a2e
+# 'bg1':        #37343a
+# 'bg2':        #3b383e
+# 'bg3':        #423f46
+# 'bg4':        #49464e
+# 'bg_red':     #ff6188
+# 'diff_red':   #55393d
+# 'bg_green':   #a9dc76
+# 'diff_green': #394634
+# 'bg_blue':    #78dce8
+# 'diff_blue':  #354157
+# 'diff_yellow':#4e432f
+# 'fg':         #e3e1e4
+# 'red':        #f85e84
+# 'orange':     #ef9062
+# 'yellow':     #e5c463
+# 'green':      #9ecd6f
+# 'blue':       #7accd7
+# 'purple':     #ab9df2
+# 'grey':       #848089 # also border and disabled
+# 'grey_dim':   #605d68
 
 [colors]
 draw_bold_text_with_bright_colors = true
@@ -42,7 +64,7 @@ style = "Regular"
 
 [window]
 dynamic_title = true
-opacity = 0.92
+opacity = 0.88
 
 [window.dimensions]
 columns = 95

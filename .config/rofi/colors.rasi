@@ -22,11 +22,13 @@ configuration {
   padding: 0;
   spacing: 0;
 
-  bg: #282828;
-  bg-alt: #444444;
-  fg: #eeeeee;
-  bg-sel: #323232;
-  fg-sel: #b3deef;
+  /* sonokai sushia */
+
+  fg: #e3e1e4;
+  bg: #2d2a2e;
+  bg-alt: #423f46; /* bg3 */
+  bg-sel: #37343a; /* bg1 */
+  fg-sel: #7accd7;
 
   background-color: @bg;
   text-color: @fg;
@@ -36,7 +38,7 @@ window {
   transparency: "real";
   width: 600px;
   border: 1px;
-  border-color: #bbbbbb;
+  border-color: #848089;
 }
 
 mainbox {
