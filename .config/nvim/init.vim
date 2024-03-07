@@ -173,15 +173,17 @@ call plug#end()
 
 " The configuration options should be placed before `colorscheme sonokai`.
 let g:sonokai_style = 'shusia'
-let g:sonokai_transparent_background = 1
+let g:sonokai_current_word = 'underline'
+
+if !exists('g:neovide')
+    let g:sonokai_transparent_background = 1
+"     highlight Normal     ctermbg=NONE guibg=NONE
+"     highlight LineNr     ctermbg=NONE guibg=NONE
+"     highlight SignColumn ctermbg=NONE guibg=NONE
+en
 
 colorscheme sonokai
 
-" if !exists('g:neovide')
-"    highlight Normal     ctermbg=NONE guibg=NONE
-"    highlight LineNr     ctermbg=NONE guibg=NONE
-"    highlight SignColumn ctermbg=NONE guibg=NONE
-"en
 
 
 " === LSP =================================================================

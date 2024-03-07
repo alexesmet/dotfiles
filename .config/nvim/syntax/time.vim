@@ -17,5 +17,5 @@ let b:current_syntax = "time"
 
 hi def link timeDate       Typedef
 hi def link timeLabel      Special
-hi def link timeNotation   Number
+hi def link timeNotation   Constant
 hi def link timeComment    Comment

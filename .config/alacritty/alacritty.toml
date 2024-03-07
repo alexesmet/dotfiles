@@ -8,6 +8,8 @@
 # - [x] rofi
 # - [x] vim
 # - [x] galendae
+# - [x] dunst
+# - [x] zellij
 
 [colors.primary]
 background = "#2d2a2e"
@@ -49,7 +51,7 @@ white        = "#e3e1e4"
 # 'grey_dim':   #605d68
 
 [colors]
-draw_bold_text_with_bright_colors = true
+draw_bold_text_with_bright_colors = false
 
 [font]
 size = 13.5

@@ -3,5 +3,5 @@ Encoding=UTF-8
 Version=1.0
 Type=Application
 Terminal=false
-Exec=~/.local/bin/stopwatch-desktop.sh
+Exec=stopwatch-desktop.sh
 Name=Custom stopwatch script

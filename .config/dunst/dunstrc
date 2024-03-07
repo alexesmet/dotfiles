@@ -32,7 +32,7 @@
     text_icon_padding = 8
     frame_width = 1
     frame_color = "#848089"
-    highlight = "#e5c463"
+    highlight = "#848089"
     background = "#2d2a2e"
     foreground = "#e3e1e4"
     # Size of gap to display between notifications - requires a compositor.
