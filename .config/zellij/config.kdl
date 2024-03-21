@@ -263,7 +263,7 @@ themes {
         magenta "#ab9df2"
         orange  "#ef9062"
         cyan    "#78dce8"
-        black   "#1a181a"
+        black   "#2d2a2e" // bg0
         white   "#e3e1e4"
     }
 }

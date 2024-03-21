@@ -18,12 +18,9 @@ polybar 2>&1 | tee -a /tmp/polybar.log & disown
 # xdo above -t $(xdo id -n root) $(xdo id -n lemonbar)
 # xdo above -t $(xdo id -n root) $(xdo id -n stalonetray)
 # xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n stalonetray)
-
-(
-    sleep 1;
-    xset r rate 200 25;
-    setxkbmap -model pc104 -layout pl,ru -option grp:alt_shift_toggle;
-) &
+#
+xset r rate 200 25;
+setxkbmap -model pc104 -layout pl,ru -option grp:alt_shift_toggle;
 
 xsetroot -cursor_name left_ptr
 
