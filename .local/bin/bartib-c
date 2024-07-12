@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+ACTIVITY_ID=$(bartib last -n 100 | rg '\[\d+\]' | tac | fzf +s | rg '^\[(\d+)\].*$' -r '$1' --color=never)
+
+if [ -n "$1" ]; then
+    TIME_PARAM="--time $1"
+fi
+
+bartib continue $ACTIVITY_ID $TIME_PARAM

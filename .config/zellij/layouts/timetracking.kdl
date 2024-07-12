@@ -1,0 +1,38 @@
+layout {
+    new_tab_template {
+        // the default zellij tab-bar and status bar plugins
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    pane split_direction="vertical" {
+        pane {
+            size "50%"
+            pane command="nvim" {
+                cwd "~/Documents/Timetrack/"
+                args "timesheet.time"
+            }
+            pane size="30%"
+        }
+        pane {
+            pane split_direction="vertical" {
+                pane command="worked-today-desktop.sh" {
+                    args "-c"
+                }
+                pane command="watch" {
+                    args "-c" "-t" "-n" "1" "bartib report --today"
+                }
+            }
+            pane split_direction="vertical" {
+                pane command="watch"  {
+                    args "-c" "-t" "-n" "1" "bartib list --today"
+                }
+            }
+
+        }
+    }
+}

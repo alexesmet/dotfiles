@@ -253,6 +253,7 @@
 [device_notifications]
     category = "device"
     timeout = 1
+    new_icon = "none"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

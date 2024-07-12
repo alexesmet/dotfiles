@@ -1,0 +1,6 @@
+# https://neovide.dev/config-file.html
+
+
+[font]
+normal = "JetBrainsMono Nerd Font Mono"
+size = 10.0
