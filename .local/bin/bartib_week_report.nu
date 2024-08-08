@@ -15,6 +15,7 @@ def bartib_report [x: datetime] {
           | str replace 'h' 'hr' 
           | str replace 'm' 'min' 
           | str replace 's' 'sec' 
+          | str replace '<1min' '0min' 
           | into duration 
         )
       }
@@ -25,7 +26,7 @@ def bartib_report [x: datetime] {
 
 }
 
-def main [x?: datetime, --human (-h)] {
+def main [x?: datetime, --human (-h), --csv (-c)] {
   let mon = if ($x != null) {
     get_week_mon $x
   } else {
@@ -53,9 +54,18 @@ def main [x?: datetime, --human (-h)] {
           | insert $it ($r | get -i $it | default null) }
     } 
   if $human {
-    $refined
+    let formatted = $refined
       | each { |it| $it | upsert Date ( $it | get Date | format date "%Y-%m-%d %a" ) }
+      if $csv {
+        $formatted | to csv
+      } else {
+        $formatted
+      }
   } else {
-    $refined
+    if $csv {
+      $refined | to csv
+    } else {
+      $refined
+    }
   }
 }

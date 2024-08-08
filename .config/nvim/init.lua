@@ -2,18 +2,11 @@
 -- vim.cmd.source(vimrc)
 
 -- TODO:
--- Nvim signature
--- LSP Saga
--- Bufferline offset: same color as bufferline background
--- Check out neo-tree
+-- Nvim signature / marks.nvim
 -- In-code spell check 
 -- Disable completion in comments
 -- Allow inserting time: nnoremap <leader>dt "=strftime("%F")<CR>p
--- Disable line numbers in term
--- Make running terminal in vim nicer
 -- LSP: Show parameters of a currently used function
-
-
 
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
@@ -42,6 +35,8 @@ vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent.
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for.
 vim.opt.softtabstop = 4 -- ???
 vim.opt.shiftround = true -- round < and > commands
+vim.opt.spelllang = { "en" }
+vim.opt.spelloptions:append("noplainbuffer")
 
 -- Configure search in file
 vim.opt.hlsearch = false  -- disable highlighting during search

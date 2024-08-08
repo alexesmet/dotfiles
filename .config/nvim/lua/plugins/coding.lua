@@ -70,6 +70,9 @@ return {
   },
   { -- Faster and more accurate syntax highlighting.
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      { "nushell/tree-sitter-nu" },
+    },
     lazy = false,
     version = false, -- last release is way too old and doesn't work on Windows
     -- event = { "BufReadPre", "BufNewFile" },
@@ -87,7 +90,7 @@ return {
     --cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     config = function()
       require('nvim-treesitter.configs').setup({
-        highlight = { enable = true },
+        highlight = { enable = true, disable = { "yaml" } },
         indent = { enable = true },
         auto_install = true,
         ensure_installed = {

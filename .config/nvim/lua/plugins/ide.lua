@@ -2,7 +2,10 @@
 -- telescope
 -- gitsigns
 -- nvim-tree
+-- toggleterm
 -- bufferline
+
+local utils = require('util')
 
 return {
   { -- UI for searching all kinds of things
@@ -70,6 +73,21 @@ return {
       }
     }
   },
+  { -- persist and toggle multiple terminals during an editing session
+    {
+      'akinsho/toggleterm.nvim',
+      lazy = true,
+      keys = { "<M-\\>" },
+      version = "*",
+      opts = {
+        open_mapping = [[<M-\>]],
+        direction = "float",
+        close_on_exit = true,
+
+
+      }
+    }
+  },
   { -- IDE tabs
     "akinsho/bufferline.nvim",
     lazy = false,
@@ -82,6 +100,9 @@ return {
     opts = function()
       return {
         options = {
+          -- fix closing active buffer with opened file explorer
+          close_command = function(n) utils.bufremove(n) end,
+          right_mouse_command = function(n) utils.bufremove(n) end,
           offsets = {{
             filetype = "NvimTree",
             separator = true,
@@ -111,6 +132,17 @@ return {
           },
         },
       }
+    end,
+    config = function(_, opts)
+      require("bufferline").setup(opts)
+      -- Fix bufferline when restoring a session
+      vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+        callback = function()
+          vim.schedule(function()
+            pcall(nvim_bufferline)
+          end)
+        end,
+      })
     end,
   },
 }
