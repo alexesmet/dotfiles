@@ -13,7 +13,7 @@ super + d
 	rofi -show drun
 # focus the last node/desktop
 super + Tab
-	rofi -show window
+	# rofi -show window
 
 # more featured program launcher
 super + shift + d
@@ -66,7 +66,8 @@ Print
     scrot -z -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
 
 super + shift + s
-    scrot -z -s -f -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
+#   scrot -z -s -e 'mv $f /tmp/ && xclip -selection clipboard -t image/png -i /tmp/$f'
+    flameshot gui
 
 XF86Power{Down,Off}
     my-powermenu

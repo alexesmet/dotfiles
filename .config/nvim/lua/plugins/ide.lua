@@ -44,6 +44,7 @@ return {
   },
   { -- file explorer
     "nvim-tree/nvim-tree.lua",
+    enabled = true,
     lazy = true,
     dependencies = {
       "nvim-tree/nvim-web-devicons"
@@ -53,8 +54,32 @@ return {
       {"<leader>ft", "<cmd>NvimTreeFindFile<cr>", desc = "Show current file in explorer" },
     },
     opts = {
+      on_attach = function(bufnr)
+        local api = require "nvim-tree.api"
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+        -- custom mappings
+        vim.keymap.set("n", "<Right>", function()
+          local node = api.tree.get_node_under_cursor()
+          if node.nodes ~= nil and not node.open then
+            api.node.open.edit()
+          else
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Down>', true, true, true))
+          end
+        end, opts("Smart open directory"))
+        vim.keymap.set("n", "<Left>", function()
+          local node = api.tree.get_node_under_cursor()
+          if node.nodes ~= nil and node.open then
+            api.node.open.edit()
+          else
+            api.node.navigate.parent()
+          end
+        end,         opts("Smart close directory"))
+      end,
       hijack_cursor = true,
-      -- open_on_tab = true,
       view = {
         adaptive_size = false,
         centralize_selection = false,
@@ -78,6 +103,7 @@ return {
       'akinsho/toggleterm.nvim',
       lazy = true,
       keys = { "<M-\\>" },
+      cmd = "ToggleTerm",
       version = "*",
       opts = {
         open_mapping = [[<M-\>]],

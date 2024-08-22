@@ -3,7 +3,6 @@
 
 -- TODO:
 -- Nvim signature / marks.nvim
--- In-code spell check 
 -- Disable completion in comments
 -- Allow inserting time: nnoremap <leader>dt "=strftime("%F")<CR>p
 -- LSP: Show parameters of a currently used function
@@ -41,7 +40,7 @@ vim.opt.spelloptions:append("noplainbuffer")
 -- Configure search in file
 vim.opt.hlsearch = false  -- disable highlighting during search
 vim.opt.ignorecase = true
-vim.opt.smartcase = true  -- turn off ignorecase when typing uppercase
+vim.opt.smartcase = true  -- turn off ignore-case when typing uppercase
 vim.opt.incsearch = true
 
 -- Configure visuals
@@ -55,8 +54,6 @@ vim.opt.listchars = vim.opt.listchars + ",tab:› ,extends:#,trail:·" -- chars 
 vim.opt.display:append { 'lastline' } -- don't display @ on too long lines
 
 if vim.g.neovide then
-    -- # hi Pmenu guibg=grey10
-    -- # hi! link NonText Ignore
     vim.g.neovide_cursor_vfx_mode = "wireframe"
     vim.g.neovide_scroll_animation_length = 0.1
     vim.g.neovide_hide_mouse_when_typing = true
@@ -65,10 +62,9 @@ end
 -- Personal hacks
 vim.opt.virtualedit:append { 'block' } -- allow the cursor to go anywhere in visual block mode.
 
--- vim.opt.ttimeoutlen = 0 -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
+vim.opt.ttimeoutlen = 0 -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
 -- vim.opt.wildmenu = true -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 -- vim.opt.inccommand = "split" -- When nonempty, shows the effects of :substitute,  and user commands with the flag as you type.
-
 
 
 -- enable my own time format 

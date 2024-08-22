@@ -91,7 +91,7 @@ return {
     config = function()
       require('nvim-treesitter.configs').setup({
         highlight = { enable = true, disable = { "yaml" } },
-        indent = { enable = true },
+        indent = { enable = true, disable = { "yaml" } },
         auto_install = true,
         ensure_installed = {
           "bash",

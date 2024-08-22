@@ -22,6 +22,26 @@ return {
     event = "VeryLazy",
     opts = {}
   },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      modes = {
+        char = { enabled = false },
+        highlight = {
+          backdrop = false,
+        }
+      },
+    },
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" }
+    },
+    config = function (_m,opts)
+      require("flash").setup(opts)
+      vim.cmd("hi FlashLabel ctermfg=235 ctermbg=179 guifg=#2d2a2e guibg=#e5c463 gui=bold")
+      vim.cmd("hi! link FlashCurrent FlashMatch")
+    end,
+  },
   { -- Highlight color codes with their color
     "norcalli/nvim-colorizer.lua",
     event = "VeryLazy",
@@ -52,5 +72,36 @@ return {
         "to_pascal_case",
       }
     }
-  }
+  },
+  { -- spell check with programmer context
+    "psliwka/vim-dirtytalk",
+    build = ":DirtytalkUpdate",
+    config = function()
+        vim.opt.spelllang = { "en", "programming" }
+    end,
+  },
+  { -- automatically guess indentation style
+    "tpope/vim-sleuth"
+  },
+  { -- smooth scrolling
+    "psliwka/vim-smoothie",
+    event = "VeryLazy",
+    enabled = function() return not vim.g.neovide end,
+    init = function()
+      vim.g.smoothie_speed_exponentiation_factor=0.5
+      vim.g.smoothie_speed_linear_factor=40
+    end,
+  },
+  { -- kick the bad habits - stop repeating hjkl
+    "takac/vim-hardtime",
+    event = "VeryLazy",
+    enabled = false,
+    init = function()
+      vim.g.hardtime_default_on = 1
+      vim.g.hardtime_timeout = 100
+      vim.g.hardtime_maxcount = 5
+      vim.g.hardtime_allow_different_key = 1
+      vim.g.hardtime_ignore_buffer_patterns = { "nvimtree" }
+    end,
+  },
 }
