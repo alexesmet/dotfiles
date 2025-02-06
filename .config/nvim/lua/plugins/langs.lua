@@ -7,7 +7,6 @@ return {
       "neovim/nvim-lspconfig"
     },
     init = function ()
-
       -- personal command that formats beancount ledger to the end of the file
       vim.api.nvim_create_user_command('FormatBeancount', function(args)
         -- format money values
@@ -19,8 +18,7 @@ return {
       end, { range = true, nargs = 0 })
     end
   },
-  "mechatroner/rainbow_csv",
-  "freitass/todo.txt-vim"
+  "mechatroner/rainbow_csv"
 }
 
 

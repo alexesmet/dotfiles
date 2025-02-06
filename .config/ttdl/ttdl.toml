@@ -91,7 +91,7 @@ creation_date_auto = true
 fields = "done,pri,due"
 
 # default sorting
-# sort = "pri"
+sort = "pri"
 
 # shell to execute plugins. If not set, it defaults to:
 #   ["cmd", "/c"] on Windows

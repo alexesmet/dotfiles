@@ -17,8 +17,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# Styling
-# export QT_QPA_PLATFORMTHEME=qt6ct
+export COVER_LETTER_GENERATOR_TEMPLATE_TEX="$HOME/Documents/Docs/cover_letter.j2.tex"
+export COVER_LETTER_GENERATOR_TEMPLATE_TXT="$HOME/Documents/Docs/cover_letter.j2.txt"
+export COVER_LETTER_GENERATOR_OUTPUT_DIR="$HOME/Downloads/Cover Letter/"
 
 # Configs
 export NEOVIDE_FORK=1
@@ -75,4 +76,3 @@ export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
 # Added by Toolbox App
 export PATH="$PATH:/home/alexesmet/.local/share/JetBrains/Toolbox/scripts"
-

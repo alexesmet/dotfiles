@@ -23,6 +23,12 @@ return {
     opts = {}
   },
   {
+    'famiu/bufdelete.nvim',
+    keys = {
+      { "<leader>bd", "<Cmd>Bdelete<CR>", desc = "Close buffer nicely" },
+    }
+  },
+  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
@@ -94,14 +100,24 @@ return {
   },
   { -- kick the bad habits - stop repeating hjkl
     "takac/vim-hardtime",
-    event = "VeryLazy",
-    enabled = false,
     init = function()
       vim.g.hardtime_default_on = 1
       vim.g.hardtime_timeout = 100
       vim.g.hardtime_maxcount = 5
       vim.g.hardtime_allow_different_key = 1
-      vim.g.hardtime_ignore_buffer_patterns = { "nvimtree" }
     end,
   },
+  { -- automatically close buffers when there are too many
+    'axkirillov/hbac.nvim',
+    config = true,
+    opts = {
+      threshold = 7
+    }
+  },
+  {
+    'windwp/nvim-autopairs',
+    opts = {
+      enable_check_bracket_line = true
+    }
+  }
 }

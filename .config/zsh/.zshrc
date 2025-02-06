@@ -79,6 +79,7 @@ alias rescan='nmcli dev wifi list --rescan yes | cat'
 alias bing='paplay /usr/share/sounds/freedesktop/stereo/complete.oga'
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias duf='duf -only local'
+alias tmux="TERM=screen-256color-bce tmux"
 
 eval "$(zoxide init zsh)"
 source ~/.config/zsh-window-title/zsh-window-title.zsh

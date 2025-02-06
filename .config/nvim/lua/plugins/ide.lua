@@ -121,7 +121,6 @@ return {
       { "<M-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
       { "<M-right>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Pin Buffer" },
-      { "<leader>bd", "<Cmd>BufferLinePickClose<CR>", desc = "Choose buffer to close" },
     },
     opts = function()
       return {

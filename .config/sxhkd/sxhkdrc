@@ -2,18 +2,15 @@
 
 # terminal emulator
 super + {_,shift +} Return
-	alacritty --class {Alacritty,Floating},Alacritty
+    alacritty --class {Alacritty,Floating},Alacritty
 super + t
-	alacritty --class Floating,Alacritty
+    alacritty --class Floating,Alacritty
 
 
 # program launcher
 # j4-dmenu-desktop --dmenu="dmenu -l 10 -c -i -nb '#282828' -nf '#EBDBB2' -sb '#EBDBB2' -sf '#1d2021' -fn 'Cozette'"
 super + d
-	rofi -show drun
-# focus the last node/desktop
-super + Tab
-	# rofi -show window
+    rofi -show drun -m -4
 
 # more featured program launcher
 super + shift + d
@@ -29,7 +26,7 @@ super + h
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,23 +35,23 @@ super + Escape
 
 XF86AudioMute
     wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; \
-	notify-send -c device -h int:value:`bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100"` -r 84161322 "Volume = $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | rg '\[.+\]' -o)"
+    notify-send -c device -h int:value:`bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100"` -r 84161322 "Volume = $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | rg '\[.+\]' -o)"
 
 XF86Audio{Raise,Lower}Volume
-	DIR='{+,-}'; \
-	wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%$DIR; \
-	notify-send -c device -h int:value:`bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100"` -r 84161322 "Volume $DIR $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | rg '\[.+\]' -o)"
+    DIR='{+,-}'; \
+    wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%$DIR; \
+    notify-send -c device -h int:value:`bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100"` -r 84161322 "Volume $DIR $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | rg '\[.+\]' -o)"
 
 XF86AudioMicMute
     toggle-microhpone.sh
 
 XF86MonBrightness{Up,Down}
-	DIR='{inc,dec}'; \
+    DIR='{inc,dec}'; \
     xbacklight -$DIR 5; \
-	notify-send -c device -h int:value:`xbacklight -get` -r 84161324 "Brightness $DIR"
+    notify-send -c device -h int:value:`xbacklight -get` -r 84161324 "Brightness $DIR"
 
 XF86Touchpad{On,Off}
-	notify-send  -c device -r 84161325 "Touchpad {on,off}"
+    notify-send  -c device -r 84161325 "Touchpad {on,off}"
 XF86Calculator
     speedcrunch
 super + p
@@ -82,18 +79,18 @@ super + l
 
 # quit/restart bspwm
 super + shift + Escape
-	bspc wm -r
+    bspc wm -r
 
 super + ctrl + shift + p
-	bspc quit
+    bspc quit
 
 # close
 super + shift + q
-	bspc node -c
+    bspc node -c
 
 # alternate between the tiled and monocle layout
 super + f
-	bspc desktop -l next
+    bspc desktop -l next
 
 super + r
     bspc node -R 90
@@ -105,14 +102,14 @@ super + r
 
 # set the window state
 super + {v,shift + v}
-	bspc node -t {tiled,pseudo_tiled}
+    bspc node -t {tiled,pseudo_tiled}
 
 super + shift + space
     bspc node -t '~floating'
 
 # set the node flags
 super + ctrl + {m,l,z,s}
-	bspc node -g {marked,locked,private,sticky}
+    bspc node -g {marked,locked,private,sticky}
 
 #
 # focus/swap
@@ -120,7 +117,7 @@ super + ctrl + {m,l,z,s}
 
 # focus the node in the given direction
 super + {_,shift + } {Left,Down,Up,Right}
-	bspc node -{f,s} {west,south,north,east}
+    bspc node -{f,s} {west,south,north,east}
 
 super + a
     bspc node -f @parent
@@ -129,29 +126,32 @@ super + {_,shift + } w
 
 # focus the next/previous window in the current desktop
 super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
+    bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+    bspc desktop -f {prev,next}.local
 
 
 # focus the older or newer node in the focus history
 super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+    bspc wm -h off; \
+    bspc node {older,newer} -f; \
+    bspc wm -h on
 
 # focus or send to the given desktop
 super + shift + {1-9,0}
-	DIR='^{1-9,10}'; \
-    NOD=$(bspc query -N -n focused); \
-	bspc node -d $DIR; \
-	bspc desktop -f $DIR; \
-    bspc node -f $NOD
+    bspc node -d focused:^{1-9,10} --follow
 
 super + {1-9,0}
-	bspc desktop -f '^{1-9,10}'
+    bspc desktop --focus focused:^{1-9,10}
+
+# focus the last node/desktop
+super + Tab
+    bspc monitor --focus next
+
+super + shift + Tab
+    bspc node -m next --follow
 
 #
 # preselct
@@ -159,19 +159,19 @@ super + {1-9,0}
 
 # preselect the direction
 super + ctrl + {Left,Down,Up,Right}
-	bspc node -p {west,south,north,east}
+    bspc node -p {west,south,north,east}
 
 # preselect the ratio
 super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
+    bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
 super + ctrl + space
-	bspc node -p cancel
+    bspc node -p cancel
 
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
 # move/resize
@@ -179,12 +179,12 @@ super + ctrl + shift + space
 
 # expand a window by moving one of its side outward
 super + alt + {Left,Down,Up,Right}
- 	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
+    bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
 
 # # contract a window by moving one of its side inward
 super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
 super + shift + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+    bspc node -v {-20 0,0 20,0 -20,20 0}

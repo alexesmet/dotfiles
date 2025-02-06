@@ -20,7 +20,7 @@ return {
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
-        "tsserver"
+        "ts_ls",
       }
     }
   },
@@ -37,11 +37,11 @@ return {
       { 'gi', vim.lsp.buf.implementation, desc = "Go to implementation" },
       { 'gu', vim.lsp.buf.references, desc = "Show usages of the current element" },
       { '<a-cr>', vim.lsp.buf.code_action, desc = "Show available quick actions" },
-      {  '<F18>',  vim.lsp.buf.rename, desc = "Rename current element" },
-      {  '<S-F6>', vim.lsp.buf.rename, desc = "Rename current element" },
-      { '<F2>', vim.diagnostic.goto_next, desc = "Jump to next diagnostics" },
-      {  '<F14>',  vim.diagnostic.goto_prev, desc = "Jump to previous diagnostics" },
-      {  '<S-F2>', vim.diagnostic.goto_prev, desc = "Jump to previous diagnostics" }
+      { '<F18>',  vim.lsp.buf.rename, desc = "Rename current element" },
+      { '<S-F6>', vim.lsp.buf.rename, desc = "Rename current element" },
+      { '<F2>',   vim.diagnostic.goto_next, desc = "Jump to next diagnostics" },
+      { '<F14>',  vim.diagnostic.goto_prev, desc = "Jump to previous diagnostics" },
+      { '<S-F2>', vim.diagnostic.goto_prev, desc = "Jump to previous diagnostics" }
     },
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -51,12 +51,42 @@ return {
           diagnostics = { globals = { "vim" }, },
       } }, capabilities = capabilities, })
 
-      lspconfig.tsserver.setup({ capabilities = capabilities, })
+      lspconfig.ts_ls.setup({ capabilities = capabilities, })
 
-      lspconfig.rust_analyzer.setup({ capabilities = capabilities, })
+      lspconfig.gopls.setup({ settings = { gopls = {
+        usePlaceholders = true,
+        completeUnimported = true,
+        analyses = {
+          fieldalignment = true,
+          nilness = true,
+          unusedparams = true,
+          unusedwrite = true,
+          useany = true,
+        },
+      } }, capabilities = capabilities, })
+
+      lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end,
+        settings = {
+          ["rust-analyzer"] = {
+            completion = {
+              callable = {
+                snippets = "add_parentheses", -- Disables argument placeholders in function completions
+              },
+            },
+            diagnostics = {
+              enable = true,
+              experimental = { enable = true }
+            }
+          }
+        }
+      })
 
       lspconfig.beancount.setup({ init_options = {
-            journal_file = "/home/alexesmet/Documents/Accounting/root.beancount"
+        journal_file = "/home/alexesmet/Documents/Accounting/root.beancount"
       }, capabilities = capabilities, })
 
       vim.diagnostic.config( { update_in_insert = true, signs = false, virtual_text = false } )
@@ -90,7 +120,7 @@ return {
     --cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     config = function()
       require('nvim-treesitter.configs').setup({
-        highlight = { enable = true, disable = { "yaml" } },
+        highlight = { enable = true, disable = { "yaml", "docker" } },
         indent = { enable = true, disable = { "yaml" } },
         auto_install = true,
         ensure_installed = {
@@ -115,26 +145,38 @@ return {
   {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
-    config = function()
-      require('illuminate').configure({
-        -- providers: 
-        providers = { -- provider used to get references in the buffer, ordered by priority
-            'lsp',
-            'treesitter',
-            -- 'regex',
-        },
-        delay = 10, -- delay: delay in milliseconds
-        -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
-        filetypes_denylist = {
-            'dirvish',
-            'fugitive',
-        },
-        under_cursor = false, --  whether or not to illuminate under the cursor
-        large_file_overrides = nil, -- If nil, vim-illuminate will be disabled for large files.
-        min_count_to_highlight = 2 -- minimum number of matches required to perform highlighting
-        -- MORE: vim modes, regex, filetypes can also be configured
+    opts = {
+      delay = 20,
+      providers = { 'lsp', 'treesitter' },
+      filetypes_denylist = { 'dirvish', 'fugitive' },
+      under_cursor = false,
+      large_file_overrides = nil,
+      min_count_to_highlight = 2
+    },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+      local function map(key, dir, buffer)
+        vim.keymap.set("n", key, function()
+          require("illuminate")["goto_" .. dir .. "_reference"](false)
+        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
+      end
+
+      map("]]", "next")
+      map("[[", "prev")
+
+      -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          local buffer = vim.api.nvim_get_current_buf()
+          map("]]", "next", buffer)
+          map("[[", "prev", buffer)
+        end,
       })
     end,
+    keys = {
+      { "]]", desc = "Next Reference" },
+      { "[[", desc = "Prev Reference" },
+    },
   },
   { -- completion plugin
     "hrsh7th/nvim-cmp",
@@ -143,13 +185,18 @@ return {
     dependencies = {
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-buffer",
-    -- "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "windwp/nvim-autopairs"
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require("cmp")
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
       local auto_select = true
       return {
         snippet = {

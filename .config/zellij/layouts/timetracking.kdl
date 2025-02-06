@@ -10,29 +10,16 @@ layout {
         }
     }
     pane split_direction="vertical" {
-        pane {
+        pane command="nvim" {
             size "50%"
-            pane command="nvim" {
-                cwd "~/Documents/Timetrack/"
-                args "timesheet.time"
-            }
-            pane size="30%"
+            cwd "~/Documents/Timetrack/"
+            args "timesheet.time"
         }
         pane {
-            pane split_direction="vertical" {
-                pane command="worked-today-desktop.sh" {
-                    args "-c"
-                }
-                pane command="watch" {
-                    args "-c" "-t" "-n" "1" "bartib report --today"
-                }
+            pane command="worked-today-desktop.sh" {
+                args "-c"
             }
-            pane split_direction="vertical" {
-                pane command="watch"  {
-                    args "-c" "-t" "-n" "1" "bartib list --today"
-                }
-            }
-
+            pane
         }
     }
 }
