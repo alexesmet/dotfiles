@@ -1,19 +1,15 @@
 #!/bin/sh
 
 
-pgrep -x sxhkd > /dev/null || sxhkd &
+pgrep -x sxhkd > /dev/null; (sxhkd >> /tmp/sxhkd-log.txt 2>&1) & 
 pkill dunst; dunst &
-pkill srandrd
-# pgrep -x stalonetray > /dev/null || stalonetray &
-# ~/.config/lemonbar/lemonbar.sh &
-#!/usr/bin/env bash
 
 # Terminate already running bar instances
 # If all your bars have ipc enabled, you can use 
 polybar-msg cmd quit
 # Otherwise you can use the nuclear option:
-# killall -q polybar
-# Launch bar1 and bar2
+killall -q polybar
+
 
 xset -b
 xset r rate 200 25;
@@ -22,18 +18,20 @@ setxkbmap -option caps:escape
 xsetroot -cursor_name left_ptr
 
 
-sh "$(dirname "$0")"/dump_disconnected_monitor.sh
-sh "$(dirname "$0")"/multimonitor_setup.sh
-srandrd bspc wm -r
+sh "$(dirname "$0")"/dump_disconnected_monitor.sh | tee $(mktemp /tmp/bspwm-dump.XXXXX.log)
+sh "$(dirname "$0")"/multimonitor_setup.sh | tee $(mktemp /tmp/bspwm-multi.XXXXX.log)
+pkill srandrd; srandrd bspc wm -r | tee $(mktemp /tmp/bspwm-srandrd.XXXXX.log)
 
 nitrogen --restore &
 
 # Launch bar on each monitor
+(
 polybar --list-monitors | while IFS= read line; do
     monitor=$(echo $line | cut -d':' -f1)
     bar=$([ ! -z $(echo $line | cut -d' ' -f3) ] && echo "primary" || echo "secondary")
-    MONITOR=$monitor polybar --reload $bar &
+    MONITOR=$monitor polybar $bar &
 done
+) &
 
 bspc config remove_disabled_monitors  true
 bspc config remove_unplugged_monitors true
