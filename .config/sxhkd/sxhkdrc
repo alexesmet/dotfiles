@@ -10,7 +10,8 @@ super + t
 # program launcher
 # j4-dmenu-desktop --dmenu="dmenu -l 10 -c -i -nb '#282828' -nf '#EBDBB2' -sb '#EBDBB2' -sf '#1d2021' -fn 'Cozette'"
 super + d
-    rofi -show drun -m -4
+    monitor="$(bspc query -M -m .focused --names)"; \
+    rofi -show drun -m "$monitor"
 
 # more featured program launcher
 super + shift + d
@@ -18,8 +19,6 @@ super + shift + d
 
 super + x
     speedcrunch
-super + g
-    galendae
 
 super + h
     dunstctl history-pop

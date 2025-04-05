@@ -89,15 +89,6 @@ return {
   { -- automatically guess indentation style
     "tpope/vim-sleuth"
   },
-  { -- smooth scrolling
-    "psliwka/vim-smoothie",
-    event = "VeryLazy",
-    enabled = function() return not vim.g.neovide end,
-    init = function()
-      vim.g.smoothie_speed_exponentiation_factor=0.5
-      vim.g.smoothie_speed_linear_factor=40
-    end,
-  },
   { -- kick the bad habits - stop repeating hjkl
     "takac/vim-hardtime",
     init = function()
